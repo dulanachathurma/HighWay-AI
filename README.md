@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚦 HighWay AI
+# 🚦 Intelligent HighWay Transportation System (ITS) / Smart Traffic Enforcement
 
 <img width="1024" height="572" alt="fe68f5d3-6ad0-4596-b910-58da8ae4312a" src="https://github.com/user-attachments/assets/a18135ee-ebed-4d3e-a5f0-e2d5c42980ee" />
 
