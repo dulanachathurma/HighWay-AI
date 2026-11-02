@@ -239,7 +239,7 @@ curl -X POST http://localhost:4000/api/gate/check-plate \
 **Dulana Chathurma**
 Undergraduate Software Engineer, University of Kelaniya
 
-[GitHub](https://github.com/dulanachathurma) · [Medium](https://medium.com/@dulanachathurma99) · [LinkedIn](https://www.linkedin.com/](https://www.linkedin.com/in/dulana-chathurma/)
+[GitHub](https://github.com/dulanachathurma) · [Medium](https://medium.com/@dulanachathurma99) · [LinkedIn](https://www.linkedin.com/in/dulana-chathurma/)
 
 ## 📄 License
 
