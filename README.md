@@ -21,6 +21,8 @@ Automated real-time vehicle speed measurement, custom YOLO seatbelt detection, S
 
 ## 📌 Overview
 
+Uploading Expressway.mp4…
+
 **HighWay AI** transforms highway management by replacing manual radar gun checks with an automated corridor network of AI-powered vision nodes deployed along the **Southern Expressway (E01)** (e.g., Kottawa, Gelanigama, Dodangoda, Kurundugahahetekma, Pinnaduwa, Godagama, and Hambantota).
 
 1. **Edge AI Vision Nodes**: Capture vehicles, track them using ByteTrack, calculate real instantaneous speed (km/h) across calibrated virtual lines, and measure average speed between nodes (5 km apart).
