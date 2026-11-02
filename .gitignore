@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.env
+.env.local
+venv/
+__pycache__/
+*.pt
+!vision/seatbelt.pt
+backend/uploads/
+.DS_Store
