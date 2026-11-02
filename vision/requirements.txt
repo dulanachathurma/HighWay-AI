@@ -1,0 +1,8 @@
+ultralytics>=8.2.0
+opencv-python>=4.9.0
+easyocr>=1.7.1
+numpy
+requests
+lap
+python-socketio[client]>=5.11.0
+websocket-client
