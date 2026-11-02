@@ -30,7 +30,10 @@ HighWay AI පද්ධතිය ක්‍රියාත්මක වන ආක
 ---
 ## 📌 Overview
 
-Uploading Expressway.mp4…
+<img width="1035" height="636" alt="Screenshot 2026-11-02 at 19 06 45" src="https://github.com/user-attachments/assets/11382624-e6b6-4e67-ac08-9e2a796a1b63" />
+
+<img width="357" height="216" alt="Screenshot 2026-11-02 at 19 05 07" src="https://github.com/user-attachments/assets/2eb4b8eb-b2fd-40aa-8c1b-ea978c45bea2" />
+
 
 **HighWay AI** transforms highway management by replacing manual radar gun checks with an automated corridor network of AI-powered vision nodes deployed along the **Southern Expressway (E01)** (e.g., Kottawa, Gelanigama, Dodangoda, Kurundugahahetekma, Pinnaduwa, Godagama, and Hambantota).
 
@@ -303,10 +306,6 @@ Configurable in `backend/config.js`:
 - [ ] Docker Compose configuration for one-command containerized deployment
 
 ---
-<img width="1035" height="636" alt="Screenshot 2026-11-02 at 19 06 45" src="https://github.com/user-attachments/assets/11382624-e6b6-4e67-ac08-9e2a796a1b63" />
-
-<img width="357" height="216" alt="Screenshot 2026-11-02 at 19 05 07" src="https://github.com/user-attachments/assets/2eb4b8eb-b2fd-40aa-8c1b-ea978c45bea2" />
-
 ## 👤 Author
 
 **Dulana Chathurma**  
