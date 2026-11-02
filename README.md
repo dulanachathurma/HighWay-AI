@@ -1,19 +1,19 @@
 <div align="center">
 
 # 🚦 HighWay AI
+### Intelligent Highway Traffic Enforcement, Computer Vision & Automated Toll Clearance
 
-### Automated highway speed & seatbelt enforcement with Computer Vision
+Automated real-time vehicle speed measurement, custom YOLO seatbelt detection, Sri Lankan ANPR number plate recognition, and barrier-locked exit gate clearance with PayHere & Mailgun integration.
 
-Cameras detect speeding and seatbelt violations in real time.
-The exit gate stays **locked until the fine is paid**.
-
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
-![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-00FFFF)
-![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)
-![Next.js](https://img.shields.io/badge/Next.js-14-000000?logo=next.js&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)
-![Socket.io](https://img.shields.io/badge/Socket.io-010101?logo=socket.io&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://python.org)
+[![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-00FFFF)](https://ultralytics.com)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)](https://nodejs.org)
+[![Next.js](https://img.shields.io/badge/Next.js-14-000000?logo=next.js&logoColor=white)](https://nextjs.org)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)](https://mongodb.com)
+[![Socket.io](https://img.shields.io/badge/Socket.io-010101?logo=socket.io&logoColor=white)](https://socket.io)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white)](https://expressjs.com)
+[![PayHere](https://img.shields.io/badge/PayHere-Sandbox-0052CC)](https://payhere.lk)
 
 </div>
 
@@ -21,234 +21,291 @@ The exit gate stays **locked until the fine is paid**.
 
 ## 📌 Overview
 
-**HighWay AI** replaces manual police radar checks with an automated network of AI cameras placed along a highway (about 5 km apart).
+**HighWay AI** transforms highway management by replacing manual radar gun checks with an automated corridor network of AI-powered vision nodes deployed along the **Southern Expressway (E01)** (e.g., Kottawa, Gelanigama, Dodangoda, Kurundugahahetekma, Pinnaduwa, Godagama, and Hambantota).
 
-1. **Edge AI cameras** detect vehicles, measure their speed, read number plates and check seatbelt usage.
-2. **Violations are streamed in real time** (WebSockets) to a command-center dashboard at the interchange office.
-3. At the **exit toll gate**, the plate is scanned again. If the vehicle has unpaid fines, the barrier stays **locked** until the fine is paid at a kiosk.
+1. **Edge AI Vision Nodes**: Capture vehicles, track them using ByteTrack, calculate real instantaneous speed (km/h) across calibrated virtual lines, and measure average speed between nodes (5 km apart).
+2. **Sri Lankan ANPR & Seatbelt AI**: Reads Sri Lankan vehicle plates with format cleanup (e.g., `WP CAB-1234`), while a custom-trained YOLO model inspects cabin crops to detect whether the driver is wearing a seatbelt.
+3. **Real-time Central Dashboard**: Live bounding boxes, violations, and enforcement stats stream instantly via WebSockets to the Command Center.
+4. **Automated Exit Gate Kiosk**: When a vehicle reaches the toll exit lane, the ANPR camera verifies its record. If unpaid traffic fines exist, the barrier locks (`🔒 BARRIER LOCKED`). Drivers pay via an integrated credit card checkout or PayHere Sandbox, receive an email receipt via Mailgun, and the barrier grants clearance (`🔓 BARRIER OPEN`).
 
-> ⚠️ This is a working **prototype** built for learning and portfolio purposes, not a certified enforcement product. See [Limitations](#-limitations).
+---
 
-<!-- Add your screenshots here -->
-<!--
-<p align="center">
-  <img src="docs/screenshots/command-center.png" width="800" />
-  <img src="docs/screenshots/exit-gate.png" width="800" />
-</p>
--->
+## 🔐 Pre-configured Demo Accounts
 
-## ✨ Features
+The system includes JWT-based Authentication with Role-Based Access Control (RBAC). Use these pre-configured credentials to sign in to the Command Center:
 
-| Area | What it does |
-|---|---|
-| 🎯 **Vehicle tracking** | YOLOv8 detection + ByteTrack gives every vehicle a stable ID |
-| ⚡ **Speed measurement** | Time taken between two calibrated lines on the road → km/h |
-| 📏 **Average speed (5 km nodes)** | Compares the time a plate is seen at two camera nodes to catch speeding between cameras |
-| 🔢 **Plate recognition** | EasyOCR on the vehicle crop |
-| 🪢 **Seatbelt check** | Custom YOLO model (`seatbelt` / `no_seatbelt`), with a demo mode for testing |
-| 🖥️ **Live bounding boxes** | Cyan boxes with `ID \| Speed \| Seatbelt` overlay, streamed to the dashboard |
-| 🚨 **Real-time alerts** | Socket.io pushes violations and gate alerts instantly |
-| 🚧 **Exit gate automation** | `LOCKED` when fines are unpaid, `OPEN` when cleared |
-| 💳 **Kiosk billing** | Itemized toll + fines, "Pay & Unlock Gate" |
-| 📤 **Video upload** | Upload a video in the dashboard and watch the detection live |
-| 🎨 **Modern UI** | Dark glassmorphism design with a floating capsule navbar |
+| Role | Username | Password | Permissions |
+| :--- | :--- | :--- | :--- |
+| **ADMIN** | `admin` | `admin123` | Full access, system configurations, manual paid violation cleanup |
+| **OFFICER** | `officer` | `officer123` | Real-time monitoring, live alerts, exit gate override |
+
+---
+
+## ✨ Key Features
+
+| Area | Feature Description |
+| :--- | :--- |
+| 🎯 **Vehicle Tracking** | YOLOv8 object detection + ByteTrack multi-object tracking assigns persistent IDs to vehicles across frames. |
+| ⚡ **Instantaneous Speed** | Virtual calibrated timing trap lines (Line A & B) calculate speed in km/h based on real physical road distance. |
+| 📏 **Average Speed (5 km Nodes)** | Compares entry timestamp and exit timestamp across expressway camera nodes to catch speeders between cameras. |
+| 🔢 **Sri Lankan ANPR** | EasyOCR engine with regional cleanup algorithms converting raw detections into standardized Sri Lankan plates (e.g., `WP CAB-1234`, `SP KQ-5678`). |
+| 🪢 **Custom Seatbelt Detection** | Custom-trained YOLO model (`vision/seatbelt.pt`) detecting driver seatbelt compliance on cabin crops in real-time. |
+| 🗺️ **E01 Expressway Interactive Map** | Visual interactive corridor map plotting camera sensor nodes from Kottawa (NODE-01) to Hambantota (NODE-08) with live status indicators. |
+| 💳 **Card & PayHere Gateway** | Interactive Visa/Mastercard form with CVV input, and integrated PayHere Sandbox checkout with MD5 signature verification. |
+| 📧 **Mailgun Email Receipts & Alerts** | Automated itemized PDF/HTML payment receipts sent upon settlement, and instant officer alert emails on declined transactions. |
+| 🚧 **Smart Exit Gate Station** | Two-stage UX: Plate Scan ➔ Locked Barrier ➔ Card Payment ➔ **"Payment Successful!"** animation ➔ **"Barrier OPEN 🔓"** clearance. |
+| 🗑️ **Manual Record Cleanup** | Authorized officers can manually delete settled (PAID) violations with one click to keep enforcement logs clean. |
+| 🎨 **Executive Light Theme UI** | Tailored light glassmorphism interface, centered responsive navigation capsule, and zero horizontal scrolling across all devices. |
+
+---
 
 ## 🏗️ Architecture
 
 ```mermaid
 flowchart LR
-    A[Highway camera node<br/>Python + YOLOv8 + ByteTrack + EasyOCR] -->|violations + sightings<br/>REST| B[Node.js backend<br/>Express + Socket.io]
-    A -->|annotated frames<br/>Socket.io| B
-    B <--> C[(MongoDB)]
-    B <--> D[(Redis<br/>last seen plate)]
-    B -->|real-time events| E[Next.js dashboard<br/>Command Center]
-    F[Exit gate ANPR camera] -->|POST /api/gate/check-plate| B
-    B -->|gate:scan| G[Kiosk screen<br/>Exit Gate Station]
-    G -->|pay| B
+    A["📷 Highway Camera Node<br/>Python + YOLOv8 + ByteTrack + EasyOCR"] -->|REST: Violations & Sightings| B["⚡ Node.js Backend<br/>Express + Socket.io"]
+    A -->|Socket.io: Live Frames| B
+    B <--> C[("🍃 MongoDB<br/>highway_ai")]
+    B <--> D[("🔴 Redis / Cache<br/>Plate Sessions")]
+    B -->|WebSocket Events| E["💻 Next.js 14 Dashboard<br/>Command Center & Map"]
+    F["🚧 Exit Gate ANPR Sensor"] -->|POST /api/gate/check-plate| B
+    B -->|gate:scan| G["💳 Kiosk Station<br/>Exit Gate Screen"]
+    G -->|Pay by Card / PayHere| B
+    B -->|Send Receipt / Alert| H["📧 Mailgun API"]
 ```
 
-### Detection pipeline (per vehicle)
-
+### Detection Pipeline (Per Vehicle)
 ```
-frame → YOLOv8 detect → ByteTrack ID → crossed line A/B? → speed (km/h)
-                                    → plate OCR (lower part of vehicle)
-                                    → seatbelt model (upper part of vehicle)
-        speed > limit  OR  seatbelt == NO  →  POST /api/violations
+Input Frame ➔ YOLOv8 Detect ➔ ByteTrack ID ➔ Virtual Lines Crossed ➔ Speed (km/h)
+   ├── Lower Crop ➔ EasyOCR ➔ Sri Lankan Plate Formatter (WP CAB-1234)
+   └── Upper Crop ➔ Custom YOLO Seatbelt Model (seatbelt.pt)
+         └── IF (Speed > Limit OR Seatbelt == NO) ➔ POST /api/violations
 ```
 
-**Speed formula:** `speed = distance between lines (m) ÷ time between crossings (s) × 3.6`
+---
 
 ## 🧰 Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Computer Vision | Python, OpenCV, Ultralytics YOLOv8, ByteTrack, EasyOCR |
-| Backend | Node.js, Express, Socket.io, Mongoose, ioredis, Multer |
-| Database | MongoDB (Atlas or local), Redis (optional) |
-| Frontend | Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion |
+| Layer | Technologies |
+| :--- | :--- |
+| **Computer Vision** | Python 3.10+, Ultralytics YOLOv8, OpenCV, ByteTrack, EasyOCR, PyTorch |
+| **Backend API** | Node.js, Express.js, Socket.io, Mongoose (MongoDB), JWT, Bcrypt, Multer |
+| **Payment & Email** | PayHere Payment Gateway Sandbox (MD5 Signature Verification), Mailgun API |
+| **Frontend Dashboard**| Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion, Lucide Icons |
+| **Database** | MongoDB (`highway_ai` database) |
+
+---
 
 ## 📁 Project Structure
 
 ```
 Highway-Ai-System/
-├── vision/                     # Edge AI engine
-│   ├── vision_engine.py
-│   └── requirements.txt
-├── backend/                    # REST API + WebSockets
-│   ├── server.js
-│   ├── config.js               # limits, fines, toll, camera nodes
-│   ├── models/                 # Violation, VehicleSession
-│   ├── services/               # store (Redis), payment, engine runner
-│   └── scripts/simulate.js     # fake traffic for testing
-└── dashboard/                  # Next.js admin dashboard + kiosk
-    ├── app/
-    ├── components/             # LiveCameraFeed, ViolationsPanel,
-    │                           # ExitGateStation, VideoUploader, FloatingNav
-    └── lib/
+├── backend/                       # Express REST API & WebSocket Server
+│   ├── config.js                  # E01 node configs, speed limits, fines, toll rates
+│   ├── models/                    # User.js, Violation.js, VehicleSession.js, Payment.js
+│   ├── services/
+│   │   ├── engine.js              # Vision engine runner & process manager
+│   │   ├── mailer.js              # Mailgun email receipts & failure alerts
+│   │   ├── payhere.js             # PayHere Sandbox signature & verification
+│   │   ├── payment.js             # Payment settlement logic & card verification
+│   │   ├── plateUtils.js          # Sri Lankan number plate formatter (WP CAB-1234)
+│   │   └── store.js               # In-memory / Redis plate session cache
+│   ├── scripts/
+│   │   ├── seed_users.js          # Pre-configured demo accounts generator
+│   │   └── simulate.js            # Simulated highway traffic generator
+│   └── server.js                  # Express routes, webhooks & Socket.io handlers
+├── dashboard/                     # Next.js 14 Web Dashboard
+│   ├── app/
+│   │   ├── globals.css            # Light theme styling & zero-overflow configuration
+│   │   ├── layout.tsx             # Root layout with responsive viewport
+│   │   └── page.tsx               # Command Center, Map, Violations & Gate view switcher
+│   ├── components/
+│   │   ├── AuthModal.tsx          # JWT login modal (clean credentials input)
+│   │   ├── ExitGateStation.tsx    # Exit kiosk, Visa card modal & Payment Successful flow
+│   │   ├── FloatingNav.tsx        # Centered responsive navigation bar
+│   │   ├── HighwayMapView.tsx     # E01 Southern Expressway interactive node map
+│   │   ├── LiveCameraFeed.tsx     # Live AI camera stream with bounding boxes
+│   │   ├── VideoUploader.tsx      # Video upload & batch processing component
+│   │   └── ViolationsPanel.tsx    # Live violations feed with manual delete button
+│   └── lib/
+│       └── api.ts                 # REST client (GET, POST, DELETE) & Socket.io singleton
+└── vision/                        # Python Edge Vision Engine
+    ├── requirements.txt           # Python dependencies
+    ├── seatbelt.pt                # Custom trained YOLO seatbelt detection weights
+    ├── train_seatbelt.py          # PyTorch / YOLOv8 training script for seatbelts
+    └── vision_engine.py           # Core detection, ByteTrack, speed & OCR engine
 ```
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- Python 3.10+
-- MongoDB (local, or a free [MongoDB Atlas](https://www.mongodb.com/atlas) cluster)
-- Redis (optional – the backend falls back to memory)
+- **Node.js**: v18 or higher
+- **Python**: 3.10 or higher
+- **MongoDB**: Local MongoDB community service (`mongodb://localhost:27017`) or MongoDB Atlas URI
 
-### 1. Clone
-```bash
-git clone https://github.com/dulanachathurma/Highway-Ai-System.git
-cd Highway-Ai-System
-```
+---
 
-### 2. Backend
+### 1. Setup Backend
+
 ```bash
 cd backend
-cp .env.example .env        # then edit MONGO_URI (and remove REDIS_URL if you have no Redis)
 npm install
-npm run dev                 # http://localhost:4000
+
+# Setup environment variables
+cp .env.example .env
 ```
 
-### 3. Dashboard
-```bash
-cd dashboard
-cp .env.local.example .env.local
-npm install
-npm run dev                 # http://localhost:3000
+Your `backend/.env` file:
+```env
+PORT=4000
+MONGO_URI=mongodb://localhost:27017/highway_ai
+CLIENT_ORIGIN=http://localhost:3000
+JWT_SECRET=highway-ai-jwt-super-secret-key-2026
+API_KEY=highway-secret-key
+
+# Payment Gateway Configuration
+PAYMENT_PROVIDER=mock   # Options: "mock" or "payhere"
+PAYHERE_MERCHANT_ID=your_merchant_id
+PAYHERE_MERCHANT_SECRET=your_merchant_secret
+
+# Mailgun Configuration
+MAILGUN_API_KEY=your_mailgun_api_key
+MAILGUN_DOMAIN=your_mailgun_domain
+MAILGUN_FROM="HighWay AI <no-reply@highway.lk>"
+OFFICER_ALERT_EMAIL=admin@highway.lk
 ```
 
-### 4. Vision engine
+Run seed script and start backend server:
 ```bash
-cd vision
+# Seed admin and officer demo accounts
+node scripts/seed_users.js
+
+# Start server with hot-reload
+npm run dev
+# Backend running on http://localhost:4000
+```
+
+---
+
+### 2. Setup Dashboard
+
+```bash
+cd ../dashboard
+npm install
+npm run dev
+# Dashboard running on http://localhost:3000
+```
+
+---
+
+### 3. Setup Edge Vision Engine
+
+```bash
+cd ../vision
 python3 -m venv venv
-source venv/bin/activate    # Windows: venv\Scripts\activate
+source venv/bin/activate       # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-You can now either:
+You can now run detection on any sample video:
+```bash
+python vision_engine.py --source /path/to/highway_traffic.mp4 --node-id NODE-01 --speed-limit 100 --seatbelt-model seatbelt.pt --show
+```
+*Alternatively, use the **Upload Video** button directly on the dashboard Command Center!*
 
-- **Upload a video** from the dashboard (Command Center → *Upload Video*), or
-- run it manually:
-  ```bash
-  python vision_engine.py --source path/to/highway.mp4 --demo --show
-  ```
+---
 
-### 5. Try it without any camera
+### 4. Test Without a Camera (Simulation Mode)
+
+Generate realistic simulated vehicle traffic along the Southern Expressway E01:
 ```bash
 cd backend
 npm run simulate
 ```
-Then open the **Exit Gate** tab, scan `CAB1234` (🔒 locked), pay, and watch it turn 🔓 open.
 
-## ⚙️ Vision Engine Options
-
-| Flag | Description | Default |
-|---|---|---|
-| `--source` | Video file, RTSP URL or camera index | `0` |
-| `--node-id` | Camera node name (see `config.js`) | `NODE-01` |
-| `--distance-m` | **Real** distance between the two lines (metres) | `20` |
-| `--line-a`, `--line-b` | Line positions (fraction of frame height) | `0.45`, `0.75` |
-| `--speed-limit` | Speed limit in km/h | `100` |
-| `--demo` | Fake plates + random seatbelt result (for testing) | off |
-| `--seatbelt-model` | Path to a custom seatbelt YOLO model | `seatbelt.pt` |
-| `--show` | Open an OpenCV preview window | off |
-| `--fast` | Process as fast as possible (no real-time pacing) | off |
-
-> 📐 **Calibration matters.** Measure the real distance between the two lines on your road and pass it with `--distance-m`, otherwise the speed will be wrong.
-
-## 🪢 Seatbelt Model
-
-COCO-trained YOLO has no seatbelt class. Train your own YOLOv8 model with two classes, `seatbelt` and `no_seatbelt`, and save it as `vision/seatbelt.pt`. Public datasets are available on Roboflow. Until then, use `--demo`.
-
-## 💰 Fines & Toll (configurable in `backend/config.js`)
-
-| Violation | Fine (LKR) |
-|---|---|
-| Speed over 100 km/h | 5,000 |
-| Speed over 120 km/h | 10,000 |
-| Speed over 140 km/h | 20,000 |
-| No seatbelt | 2,000 |
-
-Toll = distance from entry node to the exit node × `TOLL_PER_KM`. Duplicate violations (same plate + same type within 5 minutes) are ignored.
-
-## 🔌 API Reference
-
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/violations` | Camera node reports a violation (needs `x-api-key`) |
-| `POST` | `/api/sightings` | Camera node reports a plate sighting (session + average speed) |
-| `POST` | `/api/gate/check-plate` | Exit gate check → `LOCKED` or `OPEN` |
-| `GET` | `/api/kiosk/bill/:plate` | Itemized toll + fines |
-| `POST` | `/api/kiosk/pay` | Pay (`CASH` / `CARD`) and unlock the gate |
-| `GET` | `/api/violations` | Latest violations |
-| `GET` | `/api/stats` | Today's count, unpaid count, revenue |
-| `POST` | `/api/engine/upload` | Upload a video and start the vision engine |
-| `POST` | `/api/engine/stop` | Stop the running engine |
-| `GET` | `/api/engine/status` | Engine state |
-| `GET` | `/api/health` | Health check |
-
-**Socket.io events:** `camera:frame`, `violation:new`, `officer:alert`, `gate:scan`, `payment:success`, `payment:failed`, `engine:status`, `engine:log`
-
-### Example
-```bash
-curl -X POST http://localhost:4000/api/gate/check-plate \
-  -H "Content-Type: application/json" \
-  -d '{"plate":"CAB1234"}'
-# → { "plate": "CAB1234", "status": "LOCKED", "unpaid_total": 5000, "violations": 1 }
-```
-
-## ⚠️ Limitations
-
-- Seatbelt detection needs a custom-trained model (demo mode is simulated).
-- Speed accuracy depends on correct line calibration and camera angle.
-- Plate OCR quality depends on video resolution and lighting.
-- Payment is currently a **mock** (`backend/services/payment.js`).
-- Real deployment would require legal approval, data-protection measures and secure evidence storage.
-
-## 🗺️ Roadmap
-
-- [ ] Train and ship a seatbelt detection model
-- [ ] Sri Lankan plate format cleanup for OCR
-- [ ] Real payment gateway (PayHere sandbox) + email alerts on payment failure
-- [ ] Admin login with role-based access (JWT)
-- [ ] Highway map view showing camera nodes
-- [ ] Docker Compose for one-command setup
-
-## 👤 Author
-
-**Dulana Chathurma**
-Undergraduate Software Engineer, University of Kelaniya
-
-[GitHub](https://github.com/dulanachathurma) · [Medium](https://medium.com/@dulanachathurma99) · [LinkedIn](https://www.linkedin.com/in/dulana-chathurma/)
-
-## 📄 License
-
-Released under the [MIT License](LICENSE). Add a `LICENSE` file to your repo (GitHub can create one for you when you add a new file named `LICENSE`).
+1. Open `http://localhost:3000` in your browser.
+2. Click **Sign In** and log in with `admin` / `admin123`.
+3. Switch to the **Exit Gate Kiosk** tab.
+4. Enter or scan any detected plate (e.g., `WP CAB-1234`).
+5. Notice the barrier is `🔒 LOCKED` with itemized toll and fines.
+6. Click **Pay by Card**, enter card details, and submit.
+7. Watch the **"Payment Successful!"** animation trigger, followed by the barrier unlocking to `🔓 BARRIER OPEN`!
+8. Go to the **Violations** tab and use the `✕` button to manually delete the paid record.
 
 ---
 
+## 💰 Fines & Toll Schedule (E01 Expressway)
+
+Configurable in `backend/config.js`:
+
+| Violation / Fee | Rate (LKR) | Description |
+| :--- | :--- | :--- |
+| **Speeding (100 - 120 km/h)** | LKR 5,000 | Speeding above 100 km/h highway speed limit |
+| **Speeding (120 - 140 km/h)** | LKR 10,000 | Dangerous speeding tier 2 |
+| **Speeding (> 140 km/h)** | LKR 20,000 | Severe reckless driving |
+| **Seatbelt Violation** | LKR 2,000 | Driver not wearing seatbelt |
+| **Highway Toll Rate** | LKR 25 / km | Distance from entry interchange node to exit |
+
+*Duplicate suppression prevents registering multiple identical violations for the same vehicle within 5 minutes.*
+
+---
+
+## 🔌 API Reference
+
+### Authentication & Users
+- `POST /api/auth/login` — Sign in with username and password (returns JWT & role)
+- `GET /api/auth/me` — Verify active token and retrieve user profile
+
+### Traffic & Enforcement
+- `POST /api/violations` — Edge camera node violation report (Protected by `x-api-key`)
+- `GET /api/violations` — Fetch recent violations (supports `?status=PAID|UNPAID`)
+- `DELETE /api/violations/:id` — Delete a paid violation manually
+- `POST /api/sightings` — Record vehicle sighting for average speed calculation
+- `GET /api/stats` — Summary of today's violations, unpaid fines, and total collected revenue
+
+### Exit Gate & Payments
+- `POST /api/gate/check-plate` — Check vehicle status at exit barrier (`LOCKED` or `OPEN`)
+- `GET /api/kiosk/bill/:plate` — Get itemized toll breakdown + pending fines
+- `POST /api/kiosk/pay` — Settle via Card (with number/cvv) or Cash and trigger gate unlock
+- `POST /api/kiosk/payhere/init` — Generate PayHere Sandbox checkout parameters & MD5 signature
+- `POST /api/payhere/notify` — PayHere IPN webhook callback for server-to-server confirmation
+
+### Vision Engine Control
+- `POST /api/engine/upload` — Upload video file and launch edge vision engine
+- `POST /api/engine/stop` — Terminate running vision engine process
+- `GET /api/engine/status` — Get engine execution status and logs
+
+---
+
+## 🗺️ Roadmap & Completed Milestones
+
+- [x] Train and integrate custom YOLO seatbelt detection model (`vision/seatbelt.pt`)
+- [x] Sri Lankan vehicle number plate formatting and OCR cleanup (`WP CAB-1234`)
+- [x] Real payment gateway (PayHere Sandbox checkout) + Mailgun email receipts
+- [x] JWT Authentication & Role-Based Access Control (`ADMIN` & `OFFICER`)
+- [x] Interactive E01 Southern Expressway camera node corridor map
+- [x] Manual violation record cleanup button for settled fines
+- [x] Executive light theme UI with centered responsive navigation capsule
+- [x] Zero horizontal scrolling & cross-device responsive layout
+- [ ] Docker Compose configuration for one-command containerized deployment
+
+---
+
+## 👤 Author
+
+**Dulana Chathurma**  
+Undergraduate Software Engineer, University of Kelaniya  
+- **GitHub**: [@dulanachathurma](https://github.com/dulanachathurma)
+- **LinkedIn**: [Dulana Chathurma](https://www.linkedin.com/)
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
 <div align="center">
-
-If this project helped you, consider giving it a ⭐
-
+⭐ If you found this project helpful, please consider giving it a star on GitHub! ⭐
 </div>
