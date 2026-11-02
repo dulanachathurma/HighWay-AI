@@ -303,6 +303,9 @@ Configurable in `backend/config.js`:
 - [ ] Docker Compose configuration for one-command containerized deployment
 
 ---
+<img width="1035" height="636" alt="Screenshot 2026-11-02 at 19 06 45" src="https://github.com/user-attachments/assets/11382624-e6b6-4e67-ac08-9e2a796a1b63" />
+
+<img width="357" height="216" alt="Screenshot 2026-11-02 at 19 05 07" src="https://github.com/user-attachments/assets/2eb4b8eb-b2fd-40aa-8c1b-ea978c45bea2" />
 
 ## 👤 Author
 
