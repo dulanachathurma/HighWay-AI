@@ -527,6 +527,30 @@ export default function ExitGateStation() {
                 </button>
               </div>
 
+              {/* WhatsApp direct receipt dispatch */}
+              {gate === "OPEN" && bill && (
+                <a
+                  href={`https://wa.me/94767574844?text=${encodeURIComponent(
+                    `🚦 *HIGHWAY AI — OFFICIAL RECEIPT*\n` +
+                      `🇱🇰 *Southern Expressway E01*\n` +
+                      `─────────────────────────\n` +
+                      `🚗 *Vehicle Number:* ${bill.plate}\n` +
+                      `🛣️ *Expressway Toll:* LKR ${bill.toll.toLocaleString()}\n` +
+                      `🚨 *Fines Settled:* LKR ${bill.fines_total.toLocaleString()}\n` +
+                      `💰 *TOTAL PAID:* LKR ${bill.total.toLocaleString()}\n` +
+                      `🔓 *Clearance:* BARRIER OPEN\n` +
+                      `─────────────────────────\n` +
+                      `Receipt sent to 0767574844. Safe travels! 🛣️✨`
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-2 rounded-2xl bg-[#25D366] py-3.5 font-bold text-white shadow-md hover:bg-[#20ba59] transition"
+                >
+                  <span>💬</span>
+                  <span>Send Receipt to WhatsApp (0767574844)</span>
+                </a>
+              )}
+
               <p className="text-center text-xs text-slate-400">
                 {config.provider === "payhere"
                   ? "🔒 PayHere Sandbox payment · Opens secure Sri Lankan checkout"

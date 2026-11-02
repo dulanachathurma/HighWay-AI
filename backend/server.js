@@ -21,6 +21,7 @@ const payment = require("./services/payment");
 const payhere = require("./services/payhere");
 const mailer = require("./services/mailer");
 const engine = require("./services/engine");
+const whatsapp = require("./services/whatsapp");
 const { cleanPlate } = require("./services/plateUtils");
 
 const JWT_SECRET = process.env.JWT_SECRET || "highway-ai-jwt-super-secret-key-2026";
@@ -163,6 +164,19 @@ async function settlePayment({ orderId, plate, amount, method, reference }) {
       toll: tollAmount,
     })
     .catch((err) => console.error("Receipt email error:", err.message));
+
+  // Send WhatsApp receipt to 0767574844 (non-blocking)
+  whatsapp
+    .sendPaymentReceiptWhatsApp({
+      plate,
+      amount,
+      method,
+      reference,
+      toll: tollAmount,
+      violations: unpaidFines,
+      phone: process.env.WHATSAPP_PHONE || "94767574844",
+    })
+    .catch((err) => console.error("WhatsApp error:", err.message));
 
   return payRecord;
 }
