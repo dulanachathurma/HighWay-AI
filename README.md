@@ -1,6 +1,9 @@
 <div align="center">
 
 # 🚦 HighWay AI
+
+<img width="1024" height="572" alt="fe68f5d3-6ad0-4596-b910-58da8ae4312a" src="https://github.com/user-attachments/assets/a18135ee-ebed-4d3e-a5f0-e2d5c42980ee" />
+
 ### Intelligent Highway Traffic Enforcement, Computer Vision & Automated Toll Clearance
 
 Automated real-time vehicle speed measurement, custom YOLO seatbelt detection, Sri Lankan ANPR number plate recognition, and barrier-locked exit gate clearance with PayHere & Mailgun integration.
