@@ -2,7 +2,8 @@
 
 # 🚦 Intelligent HighWay Transportation System (ITS) / Smart Traffic Enforcement
 
-<img width="1024" height="572" alt="fe68f5d3-6ad0-4596-b910-58da8ae4312a" src="https://github.com/user-attachments/assets/a18135ee-ebed-4d3e-a5f0-e2d5c42980ee" />
+<img width="1678" height="937" alt="c4203b19-80a2-4bf9-ae4e-8e34b41b2690-1" src="https://github.com/user-attachments/assets/7d55ba50-7a37-43ff-96a6-b2478b99368f" />
+
 
 ### Intelligent Highway Traffic Enforcement, Computer Vision & Automated Toll Clearance
 
