@@ -10,6 +10,7 @@ Automated real-time vehicle speed measurement, custom YOLO seatbelt detection, S
 
 <img width="1678" height="937" alt="c4203b19-80a2-4bf9-ae4e-8e34b41b2690-1" src="https://github.com/user-attachments/assets/7d55ba50-7a37-43ff-96a6-b2478b99368f" />
 
+---
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://python.org)
 [![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-00FFFF)](https://ultralytics.com)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)](https://nodejs.org)
