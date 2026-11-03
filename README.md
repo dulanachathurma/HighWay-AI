@@ -2,6 +2,8 @@
 
 # 🚦 Intelligent HighWay Transportation System (ITS) / Smart Traffic Enforcement
 
+<img width="1672" height="941" alt="project-highway-ai" src="https://github.com/user-attachments/assets/938bc00b-7a9a-4cbf-8d2f-8f08a41ca8ee" />
+
 <img width="1678" height="937" alt="c4203b19-80a2-4bf9-ae4e-8e34b41b2690-1" src="https://github.com/user-attachments/assets/7d55ba50-7a37-43ff-96a6-b2478b99368f" />
 
 
