@@ -37,7 +37,7 @@ HighWay AI පද්ධතිය ක්‍රියාත්මක වන ආක
 
 <img width="357" height="216" alt="Screenshot 2026-11-02 at 19 05 07" src="https://github.com/user-attachments/assets/2eb4b8eb-b2fd-40aa-8c1b-ea978c45bea2" />
 
-
+---
 **HighWay AI** transforms highway management by replacing manual radar gun checks with an automated corridor network of AI-powered vision nodes deployed along the **Southern Expressway (E01)** (e.g., Kottawa, Gelanigama, Dodangoda, Kurundugahahetekma, Pinnaduwa, Godagama, and Hambantota).
 
 1. **Edge AI Vision Nodes**: Capture vehicles, track them using ByteTrack, calculate real instantaneous speed (km/h) across calibrated virtual lines, and measure average speed between nodes (5 km apart).
