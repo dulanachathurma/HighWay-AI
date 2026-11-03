@@ -4,12 +4,11 @@
 
 <img width="1672" height="941" alt="project-highway-ai" src="https://github.com/user-attachments/assets/938bc00b-7a9a-4cbf-8d2f-8f08a41ca8ee" />
 
-<img width="1678" height="937" alt="c4203b19-80a2-4bf9-ae4e-8e34b41b2690-1" src="https://github.com/user-attachments/assets/7d55ba50-7a37-43ff-96a6-b2478b99368f" />
-
-
 ### Intelligent Highway Traffic Enforcement, Computer Vision & Automated Toll Clearance
 
 Automated real-time vehicle speed measurement, custom YOLO seatbelt detection, Sri Lankan ANPR number plate recognition, and barrier-locked exit gate clearance with PayHere & Mailgun integration.
+
+<img width="1678" height="937" alt="c4203b19-80a2-4bf9-ae4e-8e34b41b2690-1" src="https://github.com/user-attachments/assets/7d55ba50-7a37-43ff-96a6-b2478b99368f" />
 
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://python.org)
 [![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-00FFFF)](https://ultralytics.com)
