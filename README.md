@@ -26,7 +26,7 @@ Automated real-time vehicle speed measurement, custom YOLO seatbelt detection, S
 ---
 ## 🎥 Project Demo Video
 
-HighWay AI පද්ධතිය ක්‍රියාත්මක වන ආකාරය නරඹන්න:
+HighWay AI පද්ධතිය ක්‍රියාත්මක වන ආකාරය නරඹන්න :
 
 👉 **[▶ Watch Live Demo](https://drive.google.com/file/d/1lZzqqR5poEBughBGj35HN_2v41kh2wqQ/view?usp=sharing)**
 
@@ -113,7 +113,7 @@ Input Frame ➔ YOLOv8 Detect ➔ ByteTrack ID ➔ Virtual Lines Crossed ➔ Spe
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structures
 
 ```
 Highway-Ai-System/
